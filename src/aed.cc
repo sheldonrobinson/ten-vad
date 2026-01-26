@@ -676,7 +676,7 @@ int AUP_Aed_destroy(void** stPtr) {
   return 0;
 }
 
-int AUP_Aed_memAllocate(void* stPtr, const Aed_StaticCfg* pCfg) {
+int AUP_Aed_memAllocate(void* stPtr, const Aed_StaticCfg* pCfg, const char* onnx_path) {
   Aed_St* stHdl = (Aed_St*)(stPtr);
   Aed_StaticCfg aedStatCfg;
   PE_StaticCfg pitchStatCfg;
@@ -703,7 +703,11 @@ int AUP_Aed_memAllocate(void* stPtr, const Aed_StaticCfg* pCfg) {
 
   // 3th: create aivad instance
   if (stHdl->aivadInf == NULL) {
-    stHdl->aivadInf = new AUP_MODULE_AIVAD("onnx_model/ten-vad.onnx");
+    if (onnx_path == NULL) {
+      stHdl->aivadInf = new AUP_MODULE_AIVAD("onnx_model/ten-vad.onnx");
+    } else {
+      stHdl->aivadInf = new AUP_MODULE_AIVAD(onnx_path);
+    }
     if (stHdl->aivadInf == NULL) {
       return -1;
     }
@@ -991,3 +995,4 @@ int AUP_Aed_proc(void* stPtr, const Aed_InputData* pIn, Aed_OutputData* pOut) {
 
   return 0;
 }
+
