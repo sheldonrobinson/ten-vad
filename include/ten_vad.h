@@ -45,7 +45,7 @@ extern "C"
    * @return 0 on success, or -1 error occurs.
    */
   TENVAD_API int ten_vad_create(ten_vad_handle_t *handle, size_t hop_size,
-                                float threshold);
+                                float threshold, const char* model_path = NULL);
 
   /**
    * @brief Process one audio frame for voice activity detection.
