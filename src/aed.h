@@ -112,7 +112,7 @@ int AUP_Aed_destroy(void** stPtr);
  * Return value         :  0 - Ok
  *                        -1 - Error
  */
-int AUP_Aed_memAllocate(void* stPtr, const Aed_StaticCfg* pCfg);
+int AUP_Aed_memAllocate(void* stPtr, const Aed_StaticCfg* pCfg, const char* onnx_path = NULL);
 
 /****************************************************************************
  * AUP_Aed_init(...)
@@ -224,3 +224,4 @@ int AUP_Aed_proc(void* stPtr, const Aed_InputData* pIn, Aed_OutputData* pOut);
 #endif
 
 #endif
+
