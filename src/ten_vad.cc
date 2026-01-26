@@ -15,7 +15,7 @@ static void int16_to_float(const int16_t* inputs, int inputLen, float* output) {
   }
 }
 
-int ten_vad_create(ten_vad_handle_t* handle, size_t hop_size, float threshold) {
+int ten_vad_create(ten_vad_handle_t* handle, size_t hop_size, float threshold, const char* model_path) {
   if (AUP_Aed_create(handle) < 0) {
     return -1;
   }
@@ -29,7 +29,7 @@ int ten_vad_create(ten_vad_handle_t* handle, size_t hop_size, float threshold) {
   stHdl = (Aed_St*)(*handle);
   stHdl->dynamCfg.extVoiceThr = threshold;
 
-  if (AUP_Aed_memAllocate(*handle, &aedStCfg) < 0) {
+  if (AUP_Aed_memAllocate(*handle, &aedStCfg, model_path) < 0) {
     return -1;
   }
   if (AUP_Aed_init(*handle) < 0) {
