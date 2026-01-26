@@ -15,7 +15,7 @@ static void int16_to_float(const int16_t* inputs, int inputLen, float* output) {
   }
 }
 
-int ten_vad_create(ten_vad_handle_t* handle, size_t hop_size, float threshold, const char* model_path) {
+int ten_vad_create(ten_vad_handle_t* handle, size_t hop_size, float threshold, char* model_path) {
   if (AUP_Aed_create(handle) < 0) {
     return -1;
   }
