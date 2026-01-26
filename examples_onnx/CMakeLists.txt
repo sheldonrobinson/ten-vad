@@ -29,6 +29,8 @@ if(APPLE)
         INSTALL_RPATH "${ORT_ROOT}/lib"
         BUILD_WITH_INSTALL_RPATH TRUE
     )
+elseif(WIN32)
+    target_link_libraries(ten_vad "${ORT_ROOT}/lib/onnxruntime.lib")
 else()
     target_link_libraries(ten_vad "${ORT_ROOT}/lib/libonnxruntime.so")
 endif()
