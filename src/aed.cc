@@ -14,6 +14,7 @@
 #include "pitch_est.h"
 #include "stft.h"
 #include <assert.h>
+#include <string>
 
 #define AUP_AED_ALIGN8(o) (((o) + 7) & (~7))
 #define AUP_AED_MAX(x, y) (((x) > (y)) ? (x) : (y))
@@ -39,7 +40,7 @@ AUP_MODULE_AIVAD::AUP_MODULE_AIVAD(char* onnx_path) {
   OrtSessionOptions* session_options;
   ort_api->CreateSessionOptions(&session_options);
   ort_api->SetIntraOpNumThreads(session_options, 1);
-  #if defined(_WIN32)
+#if defined(_WIN32)
      std::string_view model_path_strv(onnx_path);
      auto onnx_model_path = std::wstring(model_path_strv.begin(), model_path_strv.end()).c_str();
 #else
@@ -1001,6 +1002,7 @@ int AUP_Aed_proc(void* stPtr, const Aed_InputData* pIn, Aed_OutputData* pOut) {
 
   return 0;
 }
+
 
 
 
