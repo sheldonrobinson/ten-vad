@@ -39,8 +39,14 @@ AUP_MODULE_AIVAD::AUP_MODULE_AIVAD(char* onnx_path) {
   OrtSessionOptions* session_options;
   ort_api->CreateSessionOptions(&session_options);
   ort_api->SetIntraOpNumThreads(session_options, 1);
+  #if defined(_WIN32)
+     std::string_view model_path_strv(onnx_path);
+     auto onnx_model_path = std::wstring(model_path_strv.begin(), model_path_strv.end()).c_str();
+#else
+     auto onnx_model_path = model_path;
+#endif
   status =
-      ort_api->CreateSession(ort_env, onnx_path, session_options, &ort_session);
+      ort_api->CreateSession(ort_env, onnx_model_path, session_options, &ort_session);
   ort_api->ReleaseSessionOptions(session_options);
   if (status) {
     printf("Failed to create ort_session: %s\n",
@@ -995,5 +1001,6 @@ int AUP_Aed_proc(void* stPtr, const Aed_InputData* pIn, Aed_OutputData* pOut) {
 
   return 0;
 }
+
 
 
