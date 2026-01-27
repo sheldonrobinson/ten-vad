@@ -43,7 +43,7 @@ AUP_MODULE_AIVAD::AUP_MODULE_AIVAD(char* onnx_path) {
      std::string_view model_path_strv(onnx_path);
      auto onnx_model_path = std::wstring(model_path_strv.begin(), model_path_strv.end()).c_str();
 #else
-     auto onnx_model_path = model_path;
+     auto onnx_model_path = onnx_path;
 #endif
   status =
       ort_api->CreateSession(ort_env, onnx_model_path, session_options, &ort_session);
@@ -1001,6 +1001,7 @@ int AUP_Aed_proc(void* stPtr, const Aed_InputData* pIn, Aed_OutputData* pOut) {
 
   return 0;
 }
+
 
 
 
