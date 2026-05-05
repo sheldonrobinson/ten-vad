@@ -10,8 +10,7 @@ import scipy.io.wavfile as Wavfile
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 
-os.system('git clone https://github.com/snakers4/silero-vad.git')  # Clone the silero-vad repo, using Silero V5
-os.system('git checkout bbf22a00640614309d60aba5467189b48c7c6ecc')
+os.system('git clone https://github.com/snakers4/silero-vad.git && cd silero-vad && git checkout bbf22a00640614309d60aba5467189b48c7c6ecc && cd ..')  # Clone the silero-vad repo, using Silero V5
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "./silero-vad/src")))
 from silero_vad.utils_vad import VADIterator, init_jit_model
 
